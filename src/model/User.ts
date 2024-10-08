@@ -65,6 +65,7 @@ const userSchema: Schema<User> = new Schema({
     messages: [messageSchema]
 });
 
+// first: if model already exists, second: if it doesnt exist and need to create it in db. All this because of how nextjs works on edge and reloads again and again unlike a designated server
 const userModel = (mongoose.models.User  as mongoose.Model<User>) || mongoose.model<User>("User", userSchema);
 
 export default userModel;
