@@ -38,6 +38,8 @@ export async function POST(request:Request): Promise<Response> {
         if(existingUserByEmail){
             
             if(existingUserByEmail.isVerified){
+
+                // existing user is verified
                 const apiResponse: ApiResponse = {
                     message: 'Username is alread exists with this email',
                     success: false
@@ -50,6 +52,8 @@ export async function POST(request:Request): Promise<Response> {
                     }
                 ); 
             } else {
+
+                // existing user is not verified, alloting new expiry date and time of cerifyCode
                 const hashedPassword = await bcrypt.hash(password, 10);
                 existingUserByEmail.password = hashedPassword;
                 existingUserByEmail.verifyCode = verifyCode;
